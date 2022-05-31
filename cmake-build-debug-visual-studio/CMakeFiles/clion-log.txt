@@ -1,0 +1,12 @@
+"C:\Program Files\JetBrains\CLion 2021.3.4\bin\cmake\win\bin\cmake.exe" -G "Visual Studio 16 2019" "C:\Users\jayle\CLionProjects\Open CV Experiments"
+-- Selecting Windows SDK version 10.0.19041.0 to target Windows 10.0.19044.
+-- OpenCV ARCH: x64
+-- OpenCV RUNTIME: vc16
+-- OpenCV STATIC: OFF
+-- Found OpenCV 4.5.1 in C:/OpenCV/x64/vc16/lib
+-- You might need to add C:\OpenCV\x64\vc16\bin to your PATH to be able to run your applications.
+OpenCV_LIBS: opencv_calib3dopencv_coreopencv_dnnopencv_features2dopencv_flannopencv_gapiopencv_highguiopencv_imgcodecsopencv_imgprocopencv_mlopencv_objdetectopencv_photoopencv_stitchingopencv_videoopencv_videoioopencv_arucoopencv_bgsegmopencv_bioinspiredopencv_ccalibopencv_datasetsopencv_dnn_objdetectopencv_dnn_superresopencv_dpmopencv_faceopencv_fuzzyopencv_hdfopencv_hfsopencv_img_hashopencv_intensity_transformopencv_line_descriptoropencv_mccopencv_optflowopencv_phase_unwrappingopencv_plotopencv_qualityopencv_rapidopencv_regopencv_rgbdopencv_shapeopencv_stereoopencv_structured_lightopencv_superresopencv_surface_matchingopencv_textopencv_trackingopencv_videostabopencv_xfeatures2dopencv_ximgprocopencv_xobjdetectopencv_xphoto
+-- LINK LIBRARIES opencv_calib3d;opencv_core;opencv_dnn;opencv_features2d;opencv_flann;opencv_gapi;opencv_highgui;opencv_imgcodecs;opencv_imgproc;opencv_ml;opencv_objdetect;opencv_photo;opencv_stitching;opencv_video;opencv_videoio;opencv_aruco;opencv_bgsegm;opencv_bioinspired;opencv_ccalib;opencv_datasets;opencv_dnn_objdetect;opencv_dnn_superres;opencv_dpm;opencv_face;opencv_fuzzy;opencv_hdf;opencv_hfs;opencv_img_hash;opencv_intensity_transform;opencv_line_descriptor;opencv_mcc;opencv_optflow;opencv_phase_unwrapping;opencv_plot;opencv_quality;opencv_rapid;opencv_reg;opencv_rgbd;opencv_shape;opencv_stereo;opencv_structured_light;opencv_superres;opencv_surface_matching;opencv_text;opencv_tracking;opencv_videostab;opencv_xfeatures2d;opencv_ximgproc;opencv_xobjdetect;opencv_xphoto
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/jayle/CLionProjects/Open CV Experiments/cmake-build-debug-visual-studio

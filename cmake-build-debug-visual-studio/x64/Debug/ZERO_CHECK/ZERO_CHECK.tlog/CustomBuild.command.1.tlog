@@ -1,0 +1,10 @@
+^C:\USERS\JAYLE\CLIONPROJECTS\OPEN CV EXPERIMENTS\CMAKE-BUILD-DEBUG-VISUAL-STUDIO\CMAKEFILES\B1AB194A5A2FD53675759E063E9FA27C\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\JetBrains\CLion 2021.3.4\bin\cmake\win\bin\cmake.exe" "-SC:/Users/jayle/CLionProjects/Open CV Experiments" "-BC:/Users/jayle/CLionProjects/Open CV Experiments/cmake-build-debug-visual-studio" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/jayle/CLionProjects/Open CV Experiments/cmake-build-debug-visual-studio/Open_CV_Experiments.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
