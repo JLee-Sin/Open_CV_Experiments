@@ -8,39 +8,44 @@
 #include "C:\OpenCV\include\opencv2\opencv_modules.hpp"
 using namespace std;
 using namespace cv;
+using namespace dnn::dnn4_v20201117;
 
 namespace recog {
     class recognition {
     public:
+        const string caffeConfigFile = "D:\\subDocx\\Face-detection-with-OpenCV-and-deep-learning-master\\Face-detection-with-OpenCV-and-deep-learning-master\\models\\deploy.prototxt";
+        const string caffeWeightFile = "D:\\subDocx\\Face-detection-with-OpenCV-and-deep-learning-master\\Face-detection-with-OpenCV-and-deep-learning-master\\models\\res10_300x300_ssd_iter_140000.caffemodel";
 
         void
-        detectFace(Mat &img, CascadeClassifier &cascade, CascadeClassifier &nestedCascade, double scale, Scalar color) {
-            vector<Rect> faces, faces2;
-            Mat gray, smallImage;
+        detectFace(Mat img, double scale, Scalar color, double fps) {
+            Net net = readNetFromCaffe(caffeConfigFile, caffeWeightFile);
 
-            cvtColor(img, gray, COLOR_BGR2GRAY);
-            double fx = 1 / scale;
+            Mat inputBlob = blobFromImage(img, scale);
 
-            resize(gray, smallImage, Size(), fx, fx, INTER_LINEAR_EXACT);
-            equalizeHist(smallImage, smallImage);
+            net.setInput(inputBlob, "data");
+            Mat detection = net.forward("detection_out");
 
-            cascade.detectMultiScale(smallImage, faces, 1.1, 2, 0 | CASCADE_SCALE_IMAGE, Size(30, 30));
+            Mat detectionMat(detection.size[2], detection.size[3], CV_32F, detection.ptr<float>());
 
-            for (size_t x = 0; x < faces.size(); x++) {
-                Rect r = faces[x];
-                Mat smallImgROI;
-                vector<Rect> nestedObjects;
-                Point center;
-                Scalar color = Scalar(255, 0, 0); // Color for Drawing tool
-                int radius;
+            float confidenceThreshold = .75;
 
-                double aspect_ratio = (double) r.width / r.height;
-                if (0.75 < aspect_ratio && aspect_ratio < 1.3) {
-                    rectangle(img, Point(cvRound(r.x * scale), cvRound(r.y * scale)),
-                              Point(cvRound((r.x + r.width - 1) * scale), cvRound((r.y + r.height - 1) * scale)), color,
-                              3, 8, 0);
+            for(int i = 0; i < detectionMat.rows; i++) {
+                float  confidence = detectionMat.at<float>(i,1);
+
+                if(confidence > confidenceThreshold) {
+                    int xLeftBottom = static_cast<int>(detectionMat.at<float>(i, 3) * img.cols);
+                    int yLeftBottom = static_cast<int>(detectionMat.at<float>(i, 4) * img.rows);
+                    int xRightTop = static_cast<int>(detectionMat.at<float>(i, 5) * img.cols);
+                    int yRightTop = static_cast<int>(detectionMat.at<float>(i, 6) * img.rows);
+
+                    rectangle(img, Point(xLeftBottom, yLeftBottom), Point(xRightTop, yRightTop), color,2, 4);
                 }
             }
+
+            String FPS = to_string(fps);
+            putText(img, FPS, Point(15,20), FONT_HERSHEY_PLAIN, scale, color, 1, LINE_AA, false);
+
+            imshow("", img);
         };
     };
 }

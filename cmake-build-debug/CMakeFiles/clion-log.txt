@@ -1,8 +1,8 @@
 conan install "C:/Users/jayle/CLionProjects/Open CV Experiments" "-if=C:\Users\jayle\CLionProjects\Open CV Experiments\cmake-build-debug" -pr=default
 ERROR: Conanfile not found at C:/Users/jayle/CLionProjects/Open CV Experiments\conanfile.py or C:/Users/jayle/CLionProjects/Open CV Experiments\conanfile.txt
 "C:\Program Files\JetBrains\CLion 2021.3.4\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2021.3.4/bin/ninja/win/ninja.exe" -G Ninja "C:\Users\jayle\CLionProjects\Open CV Experiments"
--- OpenCV ARCH: x64
--- OpenCV RUNTIME: mingw
+-- OpenCV ARCH: x86
+-- OpenCV RUNTIME: vc14
 -- OpenCV STATIC: OFF
 CMake Warning at C:/OpenCV/OpenCVConfig.cmake:176 (message):
   Found OpenCV Windows Pack but it has no binaries compatible with your
