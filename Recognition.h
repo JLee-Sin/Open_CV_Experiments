@@ -16,8 +16,7 @@ namespace recog {
         const string caffeConfigFile = "D:\\subDocx\\Face-detection-with-OpenCV-and-deep-learning-master\\Face-detection-with-OpenCV-and-deep-learning-master\\models\\deploy.prototxt";
         const string caffeWeightFile = "D:\\subDocx\\Face-detection-with-OpenCV-and-deep-learning-master\\Face-detection-with-OpenCV-and-deep-learning-master\\models\\res10_300x300_ssd_iter_140000.caffemodel";
 
-        void
-        detectFace(Mat img, double scale, Scalar color, double fps) {
+        Mat detectFace(Mat img, double scale, Scalar color, double fps) {
             Net net = readNetFromCaffe(caffeConfigFile, caffeWeightFile);
 
             Mat inputBlob = blobFromImage(img, scale);
@@ -30,22 +29,24 @@ namespace recog {
             float confidenceThreshold = .75;
 
             for(int i = 0; i < detectionMat.rows; i++) {
-                float  confidence = detectionMat.at<float>(i,1);
+                float  confidence = detectionMat.at<float>(i,2);
 
-                if(confidence > confidenceThreshold) {
-                    int xLeftBottom = static_cast<int>(detectionMat.at<float>(i, 3) * img.cols);
-                    int yLeftBottom = static_cast<int>(detectionMat.at<float>(i, 4) * img.rows);
-                    int xRightTop = static_cast<int>(detectionMat.at<float>(i, 5) * img.cols);
-                    int yRightTop = static_cast<int>(detectionMat.at<float>(i, 6) * img.rows);
-
-                    rectangle(img, Point(xLeftBottom, yLeftBottom), Point(xRightTop, yRightTop), color,2, 4);
+                if(confidence < confidenceThreshold) {
+                    continue;
                 }
+                int xLeftBottom = static_cast<int>(detectionMat.at<float>(i, 3) * img.cols);
+                int yLeftBottom = static_cast<int>(detectionMat.at<float>(i, 4) * img.rows);
+                int xRightTop = static_cast<int>(detectionMat.at<float>(i, 5) * img.cols);
+                int yRightTop = static_cast<int>(detectionMat.at<float>(i, 6) * img.rows);
+
+                rectangle(img, Point(xLeftBottom, yLeftBottom), Point(xRightTop, yRightTop), color,2, 4);
+
             }
 
             String FPS = to_string(fps);
             putText(img, FPS, Point(15,20), FONT_HERSHEY_PLAIN, scale, color, 1, LINE_AA, false);
 
-            imshow("", img);
+            return img;
         };
     };
 }

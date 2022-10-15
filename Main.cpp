@@ -1,17 +1,18 @@
 #include "Recognition.h"
 #include <iostream>
 
+void task1(Mat mat, double scale, Scalar scalar, float fps);
+
 using namespace recog;
 using namespace cv;
+Mat finImg;
 
 int main() {
     Scalar color = Scalar (0, 0, 255);
-    recognition r;
     VideoCapture capture;
     Mat frame, image;
-    double FPS;
+    float FPS;
     double scale = 1;
-
 
     capture.open(0);
     if(capture.isOpened()) {
@@ -24,19 +25,26 @@ int main() {
                 break;
             }
 
-            Mat frameClone = frame.clone();
-            r.detectFace(frameClone, scale, color, FPS);
+            thread t1(task1,frame, scale, color, FPS);
+
 
             char c = (char) waitKey(10);
             if (c == 27) {
                 break;
             }
+            t1.join();
+            imshow("", finImg);
         }
     }
     else {
         cout << "Error launching video Capture" << endl;
     }
 
+}
+
+void task1(Mat frame, double scale, Scalar color, float FPS) {
+    recognition r;
+    finImg= r.detectFace(frame, scale, color, FPS);
 }
 
 
